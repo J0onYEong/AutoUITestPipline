@@ -1,10 +1,9 @@
 pipeline {
     agent any 
     stages {
-        stage('Stage 1') {
+        stage('Initial stage') {
             steps {
-                echo 'Hello world from scm!'
-                echo "매개변수 테스트: ${params.Greeting}"
+                echo "브렌치: ${env.BRANCH_NAME}"
             }
         }
     }
