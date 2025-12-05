@@ -3,8 +3,15 @@ import Testing
 
 struct JuniosTests {
 
-    @Test func example() async throws {
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+    @Test func 플러스원테스트() async throws {
+        // Given
+        let sut = HelloModel()
+        
+        // When
+        let result = sut.plusOne(to: 1)
+        
+        // Then
+        #expect(result == 2)
     }
 
 }
