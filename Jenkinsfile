@@ -1,9 +1,9 @@
 pipeline {
-    agent any 
+    agent { label 'macos' }
     stages {
-        stage('Initial stage') {
+        stage('Creat project') {
             steps {
-                echo "브렌치: ${env.BRANCH_NAME}"
+                sh './Scripts/makeRootProject.sh'
             }
         }
     }
