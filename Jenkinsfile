@@ -28,6 +28,23 @@ pipeline {
                 '''
             }
         }
+
+        stage('Test project') {
+            steps {
+                sh '''
+                cd Junios
+
+                xcodebuild \
+                  -workspace Junios.xcworkspace \
+                  -scheme Junios \
+                  -configuration Debug \
+                  -sdk iphonesimulator \
+                  -destination "platform=iOS Simulator,name=${DEST_DEVICE},OS=${DEST_OS}" \
+                  test \
+                  -resultBundlePath TestResults.xcresult
+                '''
+            }
+        }
     }
 }
 
