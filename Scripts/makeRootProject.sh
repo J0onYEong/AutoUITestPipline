@@ -8,6 +8,9 @@ cd Junios
 
 echo "#1. configure mise"
 eval "$(mise activate)"
+
+mise install tuist@4.90.0
+
 mise use tuist@4.90.0
 
 which tuist
