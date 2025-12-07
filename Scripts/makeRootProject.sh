@@ -4,6 +4,8 @@ export PATH="/Users/choejun-yeong/.local/bin:$PATH"
 
 echo "Current Shell: $SHELL"
 
+which tuist
+
 cd Junios
 
 echo "#1. configure mise"
