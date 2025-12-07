@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-export PATH="$HOME/.local/share/mise/shims:$HOME/.local/share/mise/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.local/share/mise/shims:$HOME/.local/share/mise/bin:$PATH"
 cd Junios
 
 echo "[Mise] configuration"
