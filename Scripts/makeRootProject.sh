@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+pwd
+export PATH="$HOME/Users/choejun-yeong/.local/bin:$PATH"
+
 cd Junios
 
 echo "#1. Activate mise"
