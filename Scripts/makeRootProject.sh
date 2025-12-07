@@ -3,12 +3,14 @@
 export PATH="$HOME/.local/share/mise/shims:$HOME/.local/share/mise/bin:$PATH"
 cd Junios
 
-echo "#1. configure mise"
+echo "[Mise] configuration"
 eval "$(mise activate)"
+
+echo "[Tuist] configuration"
 mise use tuist@4.90.0
 
-echo "#2. Tuist install"
+echo "[Tuist] Install xcode project dependencies"
 tuist install
 
-echo "#3. Tuist generate"
+echo "[Tuist] Generate project"
 tuist generate --no-open
