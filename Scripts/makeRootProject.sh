@@ -5,7 +5,7 @@ export PATH="/Users/choejun-yeong/.local/bin:$PATH"
 cd Junios
 
 echo "#1. Activate mise"
-mise activate
+eval "$(mise activate zsh)"
 
 echo "#2. Tuist install"
 tuist install
