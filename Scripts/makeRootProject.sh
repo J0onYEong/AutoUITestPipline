@@ -1,11 +1,11 @@
-#!/bin/zsh
+#!/bin/bash
 
 export PATH="/Users/choejun-yeong/.local/bin:$PATH"
 
 cd Junios
 
 echo "#1. configure mise"
-mise activate zsh
+eval "$(mise activate bash)"
 mise use tuist@4.90.0
 
 echo "#2. Tuist install"
