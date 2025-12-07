@@ -43,7 +43,7 @@ pipeline {
                   -sdk iphonesimulator \
                   -destination "platform=iOS Simulator,name=${DEST_DEVICE},OS=${DEST_OS}" \
                   test \
-                  -resultBundlePath TestResults.xcresult
+                  -resultBundlePath "TestResults_${env.BUILD_NUMBER}.xcresult"
                 '''
             }
         }
