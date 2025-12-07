@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Creat project') {
             steps {
-                sh './Scripts/makeRootProject.sh'
+                sh 'zsh ./Scripts/makeRootProject.sh'
             }
         }
     }
