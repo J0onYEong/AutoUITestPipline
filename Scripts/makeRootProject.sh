@@ -4,9 +4,6 @@ source .zshrc
 
 cd Junios
 
-echo "[Mise] configuration"
-eval "$(mise activate)"
-
 echo "[Tuist] configuration"
 mise use tuist@4.90.0
 
