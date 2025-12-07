@@ -1,7 +1,6 @@
 #!/bin/zsh
 
-pwd
-export PATH="$HOME/Users/choejun-yeong/.local/bin:$PATH"
+export PATH="/Users/choejun-yeong/.local/bin:$PATH"
 
 cd Junios
 
