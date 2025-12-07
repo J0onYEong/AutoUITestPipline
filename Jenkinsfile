@@ -1,10 +1,33 @@
 pipeline {
     agent any
+
+    environment {
+        DEST_DEVICE = "iPhone 17 Pro"
+        DEST_OS = "26.0"
+    }
+
     stages {
         stage('Creat project') {
             steps {
                 sh 'zsh ./Scripts/makeRootProject.sh'
             }
         }
+
+        stage('Build project') {
+            steps {
+                sh '''
+                cd Junios
+
+                xcodebuild \
+                  -workspace Junios.xcworkspace \
+                  -scheme Junios \
+                  -configuration Debug \
+                  -sdk iphonesimulator \
+                  -destination "platform=iOS Simulator,name=${DEST_DEVICE},OS=${DEST_OS}" \
+                  clean build
+                '''
+            }
+        }
     }
 }
+
