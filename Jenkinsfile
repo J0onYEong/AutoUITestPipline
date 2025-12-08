@@ -6,7 +6,7 @@ pipeline {
         DEST_OS = "26.0"
         DEBUG_BUILD_SCHEME = "Junios"
         TEST_BUILD_SCHEME = "Junios"
-        GITHUB_TOKEN = credentials('github-token')
+        GITHUB_TOKEN = credentials('github-token2')
     }
 
     stages {
