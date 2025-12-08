@@ -39,7 +39,7 @@ pipeline {
                     -H "Authorization: Bearer $GITHUB_TOKEN" \
                     -H "X-GitHub-Api-Version: 2022-11-28" \
                     https://api.github.com/repos/J0onYEong/AutoUITestPipline/pulls/${CHANGE_ID}/comments \
-                    -d '{ "body": "빌드가 완료되었습니다! 🎉" }'
+                    -d '{ "body": "빌드가 완료되었습니다! 🎉🎉" }'
                 '''
 
                 githubNotify context: 'Build Application', status: 'SUCCESS', description: '빌드 성공'
