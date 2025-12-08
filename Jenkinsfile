@@ -37,7 +37,7 @@ pipeline {
 
         stage('Test project') {
             steps {
-                githubNotify context: 'Unit Tests', status: 'PENDING'
+                githubNotify context: 'Unit Tests', status: 'PENDING', description: '빌드 성공'
                 sh '''
                 echo "Running UI Tests for Pull Request #${CHANGE_ID}"
 
@@ -52,7 +52,7 @@ pipeline {
                     test \
                     -resultBundlePath TestResults_${BUILD_NUMBER}.xcresult
                 '''
-                githubNotify context: 'Unit Tests', status: 'SUCCESS'
+                githubNotify context: 'Unit Tests', status: 'SUCCESS', description: '단위 테스트 통과'
             }
         }
     }
