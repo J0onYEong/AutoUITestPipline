@@ -21,7 +21,7 @@ struct LoginView: View {
                 .textFieldStyle(.roundedBorder)
                 .padding(.horizontal)
 
-            Button("로그인") {
+            Button("정보저장") {
                 userName = inputName.trimmingCharacters(in: .whitespaces)
                 isLoggedIn = true
                 dismiss()
