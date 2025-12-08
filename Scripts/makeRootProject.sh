@@ -1,8 +1,7 @@
 #!/bin/zsh
 
+export PATH="/opt/homebrew/bin:$PATH"
 eval "$(mise activate zsh)"
-
-which mise
 
 cd Junios
 
