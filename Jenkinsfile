@@ -22,7 +22,9 @@ pipeline {
                 echo "Running build for Pull Request #${CHANGE_ID}"
 
                 cd Junios
+
                 exit(1)
+                
                 xcodebuild \
                     -workspace Junios.xcworkspace \
                     -scheme ${DEBUG_BUILD_SCHEME} \
@@ -36,6 +38,7 @@ pipeline {
             post {
                 failure {
                     githubNotify context: 'Build Application', status: 'FAILURE', description: '빌드 실패'
+                    githubNotify context: 'Unit Tests', status: 'ERROR', description: '빌드 실패로 테스트 미실행'
                 }
             }
         }
