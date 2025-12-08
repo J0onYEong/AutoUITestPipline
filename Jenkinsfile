@@ -39,7 +39,7 @@ pipeline {
                     -H "Accept: application/vnd.github+json" \
                     -H "Authorization: Bearer $GITHUB_TOKEN" \
                     -H "X-GitHub-Api-Version: 2022-11-28" \
-                    https://api.github.com/repos/J0onYEong/AutoUITestPipline/issues//${CHANGE_ID}/comments \
+                    https://api.github.com/repos/J0onYEong/AutoUITestPipline/issues/${CHANGE_ID}/comments \
                     -d '{ "body": "빌드가 완료되었습니다! 🎉🎉" }'
                 '''
 
