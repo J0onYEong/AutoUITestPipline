@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-eval "$(mise activate)"
+eval "$(mise activate zsh)"
 
 which mise
 
