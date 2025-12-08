@@ -13,7 +13,7 @@ struct LoginView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            Text("로그인 하기")
+            Text("로그인 하기!")
                 .font(.largeTitle)
                 .fontWeight(.bold)
 
