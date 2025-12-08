@@ -6,10 +6,10 @@ eval "$(mise activate zsh)"
 cd Junios
 
 echo "[Tuist] configuration"
-mise use tuist@4.90.0
+mise install
 
 echo "[Tuist] Install xcode project dependencies"
-mise exec tuist install
+mise exec tuist -- tuist install
 
 echo "[Tuist] Generate project"
-mise exec tuist generate --no-open
+mise exec tuist -- tuist generate --no-open
