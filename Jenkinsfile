@@ -33,6 +33,11 @@ pipeline {
                 '''
                 githubNotify context: 'Build Application', status: 'SUCCESS'
             }
+            post {
+                failure {
+                    githubNotify context: 'Build Application', status: 'FAILURE', description: '빌드 실패'
+                }
+            }
         }
 
         stage('Test project') {
@@ -53,6 +58,11 @@ pipeline {
                     -resultBundlePath TestResults_${BUILD_NUMBER}.xcresult
                 '''
                 githubNotify context: 'Unit Tests', status: 'SUCCESS', description: '단위 테스트 통과'
+            }
+            post {
+                failure {
+                    githubNotify context: 'Unit Tests', status: 'FAILURE', description: '테스트 실패'
+                }
             }
         }
     }
