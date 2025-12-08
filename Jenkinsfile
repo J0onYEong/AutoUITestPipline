@@ -17,36 +17,54 @@ pipeline {
 
         stage('Build project') {
             steps {
+                githubNotify context: 'Build Application', status: 'PENDING'
                 sh '''
-                cd Junios
+                echo "Running build for Pull Request #${CHANGE_ID}"
 
+                cd Junios
+                
                 xcodebuild \
-                  -workspace Junios.xcworkspace \
-                  -scheme ${DEBUG_BUILD_SCHEME} \
-                  -configuration Debug \
-                  -sdk iphonesimulator \
-                  -destination "platform=iOS Simulator,name=${DEST_DEVICE},OS=${DEST_OS}" \
-                  clean build
+                    -workspace Junios.xcworkspace \
+                    -scheme ${DEBUG_BUILD_SCHEME} \
+                    -configuration Debug \
+                    -sdk iphonesimulator \
+                    -destination "platform=iOS Simulator,name=${DEST_DEVICE},OS=${DEST_OS}" \
+                    clean build
                 '''
+                githubNotify context: 'Build Application', status: 'SUCCESS', description: '빌드 성공'
+            }
+            post {
+                failure {
+                    githubNotify context: 'Build Application', status: 'FAILURE', description: '빌드 실패'
+                    githubNotify context: 'Unit Tests', status: 'ERROR', description: '빌드 실패로 테스트 미실행'
+                }
             }
         }
 
         stage('Test project') {
             steps {
+                githubNotify context: 'Unit Tests', status: 'PENDING', description: '빌드 성공'
                 sh '''
+                echo "Running UI Tests for Pull Request #${CHANGE_ID}"
+
                 cd Junios
 
                 xcodebuild \
-                  -workspace Junios.xcworkspace \
-                  -scheme ${TEST_BUILD_SCHEME} \
-                  -configuration Debug \
-                  -sdk iphonesimulator \
-                  -destination "platform=iOS Simulator,name=${DEST_DEVICE},OS=${DEST_OS}" \
-                  test \
-                  -resultBundlePath TestResults_${BUILD_NUMBER}.xcresult
+                    -workspace Junios.xcworkspace \
+                    -scheme ${TEST_BUILD_SCHEME} \
+                    -configuration Debug \
+                    -sdk iphonesimulator \
+                    -destination "platform=iOS Simulator,name=${DEST_DEVICE},OS=${DEST_OS}" \
+                    test \
+                    -resultBundlePath TestResults_${BUILD_NUMBER}.xcresult
                 '''
+                githubNotify context: 'Unit Tests', status: 'SUCCESS', description: '단위 테스트 통과'
+            }
+            post {
+                failure {
+                    githubNotify context: 'Unit Tests', status: 'FAILURE', description: '테스트 실패'
+                }
             }
         }
     }
 }
-

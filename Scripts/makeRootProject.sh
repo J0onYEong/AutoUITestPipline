@@ -1,14 +1,15 @@
 #!/bin/zsh
 
-source .zshrc
+export PATH="/opt/homebrew/bin:$PATH"
+eval "$(mise activate zsh)"
 
 cd Junios
 
 echo "[Tuist] configuration"
-mise use tuist@4.90.0
+mise install
 
 echo "[Tuist] Install xcode project dependencies"
-tuist install
+mise exec tuist -- tuist install
 
 echo "[Tuist] Generate project"
-tuist generate --no-open
+mise exec tuist -- tuist generate --no-open
