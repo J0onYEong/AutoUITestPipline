@@ -34,6 +34,11 @@ pipeline {
                 '''
                 
                 sh '''
+                strlen() {
+                    local str="$1"
+                    echo "Length: ${#str}"
+                }
+                strlen $GITHUB_TOKEN
                 curl -L \
                     -X POST \
                     -H "Accept: application/vnd.github+json" \
