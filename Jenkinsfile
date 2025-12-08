@@ -22,8 +22,6 @@ pipeline {
                 echo "Running build for Pull Request #${CHANGE_ID}"
 
                 cd Junios
-
-                exit(1)
                 
                 xcodebuild \
                     -workspace Junios.xcworkspace \
