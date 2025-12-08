@@ -2,6 +2,7 @@
 
 export PATH="$HOME/.local/bin:$HOME/.local/share/mise/shims:$HOME/.local/share/mise/bin:$PATH"
 
+echo "$HOME"
 which mise
 
 cd Junios
