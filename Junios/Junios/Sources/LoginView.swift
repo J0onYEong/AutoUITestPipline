@@ -17,7 +17,7 @@ struct LoginView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
 
-            TextField("이름을 입력하세요", text: $inputName)
+            TextField("성함을 입력하세요", text: $inputName)
                 .textFieldStyle(.roundedBorder)
                 .padding(.horizontal)
 
