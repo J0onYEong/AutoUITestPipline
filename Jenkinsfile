@@ -18,7 +18,7 @@ pipeline {
         stage('Build project') {
             steps {
                 sh '''
-                echo "Running build for Pull Request #${env.CHANGE_ID}"
+                echo "Running build for Pull Request #${CHANGE_ID}"
 
                 cd Junios
 
@@ -36,7 +36,7 @@ pipeline {
         stage('Test project') {
             steps {
                 sh '''
-                echo "Running test for Pull Request #${env.CHANGE_ID}"
+                echo "Running test for Pull Request #${CHANGE_ID}"
 
                 cd Junios
 
