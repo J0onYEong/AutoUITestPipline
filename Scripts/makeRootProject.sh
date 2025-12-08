@@ -1,8 +1,7 @@
 #!/bin/zsh
 
-export PATH="$HOME/.local/bin:$HOME/.local/share/mise/shims:$HOME/.local/share/mise/bin:$PATH"
+eval "${mise initialize}"
 
-echo "$HOME"
 which mise
 
 cd Junios
