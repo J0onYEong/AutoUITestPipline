@@ -31,7 +31,7 @@ pipeline {
                         -destination "platform=iOS Simulator,name=${DEST_DEVICE},OS=${DEST_OS}" \
                         clean build
                     '''
-                    publishChecks(conclusion: 'SUCCESS', summary: '빌드 성공, title: 'Build Succeeded')
+                    publishChecks(conclusion: 'SUCCESS', summary: '빌드 성공', title: 'Build Succeeded')
                 }
             }
         }
