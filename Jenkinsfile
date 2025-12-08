@@ -17,40 +17,45 @@ pipeline {
 
         stage('Build project') {
             steps {
-                sh '''
-                echo "Running build for Pull Request #${CHANGE_ID}"
+                withChecks(name: "Build application") {
+                    sh '''
+                    echo "Running build for Pull Request #${CHANGE_ID}"
 
-                cd Junios
+                    cd Junios
 
-                xcodebuild \
-                  -workspace Junios.xcworkspace \
-                  -scheme ${DEBUG_BUILD_SCHEME} \
-                  -configuration Debug \
-                  -sdk iphonesimulator \
-                  -destination "platform=iOS Simulator,name=${DEST_DEVICE},OS=${DEST_OS}" \
-                  clean build
-                '''
+                    xcodebuild \
+                        -workspace Junios.xcworkspace \
+                        -scheme ${DEBUG_BUILD_SCHEME} \
+                        -configuration Debug \
+                        -sdk iphonesimulator \
+                        -destination "platform=iOS Simulator,name=${DEST_DEVICE},OS=${DEST_OS}" \
+                        clean build
+                    '''
+                    publishChecks(conclusion: 'SUCCESS', summary: '빌드 성공, title: 'Build Succeeded')
+                }
             }
         }
 
         stage('Test project') {
             steps {
-                sh '''
-                echo "Running test for Pull Request #${CHANGE_ID}"
+                withChecks(name: "Unit Tests") {
+                    sh '''
+                    echo "Running UI Tests for Pull Request #${CHANGE_ID}"
 
-                cd Junios
+                    cd Junios
 
-                xcodebuild \
-                  -workspace Junios.xcworkspace \
-                  -scheme ${TEST_BUILD_SCHEME} \
-                  -configuration Debug \
-                  -sdk iphonesimulator \
-                  -destination "platform=iOS Simulator,name=${DEST_DEVICE},OS=${DEST_OS}" \
-                  test \
-                  -resultBundlePath TestResults_${BUILD_NUMBER}.xcresult
-                '''
+                    xcodebuild \
+                        -workspace Junios.xcworkspace \
+                        -scheme ${TEST_BUILD_SCHEME} \
+                        -configuration Debug \
+                        -sdk iphonesimulator \
+                        -destination "platform=iOS Simulator,name=${DEST_DEVICE},OS=${DEST_OS}" \
+                        test \
+                        -resultBundlePath TestResults_${BUILD_NUMBER}.xcresult
+                    '''
+                    publishChecks(conclusion: 'SUCCESS', summary: '단위 테스트 성공', title: 'Unit test Succeeded')
+                }
             }
         }
     }
 }
-
