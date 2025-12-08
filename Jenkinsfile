@@ -22,7 +22,7 @@ pipeline {
                 echo "Running build for Pull Request #${CHANGE_ID}"
 
                 cd Junios
-
+                exit(1)
                 xcodebuild \
                     -workspace Junios.xcworkspace \
                     -scheme ${DEBUG_BUILD_SCHEME} \
@@ -31,7 +31,7 @@ pipeline {
                     -destination "platform=iOS Simulator,name=${DEST_DEVICE},OS=${DEST_OS}" \
                     clean build
                 '''
-                githubNotify context: 'Build Application', status: 'SUCCESS'
+                githubNotify context: 'Build Application', status: 'SUCCESS', description: '빌드 성공'
             }
             post {
                 failure {
