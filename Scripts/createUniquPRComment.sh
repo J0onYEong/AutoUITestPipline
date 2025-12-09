@@ -15,8 +15,13 @@ RES_COMMENTS=$(curl -L \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   ${BASE_URL}/issues/comments)
 
-# 코맨트 삭제
-echo "$RES_COMMENTS" | yq '.[] | select(.body | contains("'"## ${UNIQUE_TITLE}"'")) | .id' | while read -r COMMENT_ID; do
+# 기존 코멘트 아이디 도출
+WILL_DELETE_COMMENT_IDS=$(
+  echo "$RES_COMMENTS" | yq '.[] | select(.body | contains("'"## ${UNIQUE_TITLE}"'")) | .id'
+)
+
+# 기존 코멘트 삭제
+echo "$WILL_DELETE_COMMENT_IDS" | while read -r COMMENT_ID; do
   curl -L \
     -X DELETE \
     -H "Accept: application/vnd.github+json" \
