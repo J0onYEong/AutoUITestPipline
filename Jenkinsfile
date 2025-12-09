@@ -37,7 +37,7 @@ pipeline {
                 
                 zsh ./Scripts/createUniquPRComment.sh \
                     "Build Result" \
-                    "## 빌드를 성공적으로 완료했습니다! 🎉" \
+                    "빌드를 성공적으로 완료했습니다! 🎉" \
                     "${GITHUB_TOKEN}" \
                     "${CHANGE_ID}"
                 '''
