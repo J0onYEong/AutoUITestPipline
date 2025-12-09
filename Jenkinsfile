@@ -4,6 +4,7 @@ pipeline {
     environment {
         DEST_DEVICE = "iPhone 17 Pro"
         DEST_OS = "26.0"
+        WORKSPACE_PATH = "Junios/Junios.xcworkspace"
         DEBUG_BUILD_SCHEME = "Junios"
         TEST_BUILD_SCHEME = "Junios"
         GITHUB_TOKEN = credentials('github-access-token')
@@ -21,11 +22,9 @@ pipeline {
                 githubNotify context: 'Build Application', status: 'PENDING'
                 sh '''
                 echo "Running build for Pull Request #${CHANGE_ID}"
-
-                cd Junios
                 
                 xcodebuild \
-                    -workspace Junios.xcworkspace \
+                    -workspace ${WORKSPACE_PATH} \
                     -scheme ${DEBUG_BUILD_SCHEME} \
                     -configuration Debug \
                     -sdk iphonesimulator \
@@ -35,13 +34,12 @@ pipeline {
                 
                 sh '''
                 
-                zsh ./Scripts/createUniquPRComment.sh \
+                zsh ./Scripts/createUniquePRComment.sh \
                     "Build Result" \
                     "빌드를 성공적으로 완료했습니다! 🎉" \
                     "${GITHUB_TOKEN}" \
                     "${CHANGE_ID}"
                 '''
-
                 githubNotify context: 'Build Application', status: 'SUCCESS', description: '빌드 성공'
             }
             post {
@@ -58,16 +56,13 @@ pipeline {
                 sh '''
                 echo "Running UI Tests for Pull Request #${CHANGE_ID}"
 
-                cd Junios
-
-                xcodebuild \
-                    -workspace Junios.xcworkspace \
-                    -scheme ${TEST_BUILD_SCHEME} \
-                    -configuration Debug \
-                    -sdk iphonesimulator \
-                    -destination "platform=iOS Simulator,name=${DEST_DEVICE},OS=${DEST_OS}" \
-                    test \
-                    -resultBundlePath TestResults_${BUILD_NUMBER}.xcresult
+                zsh ./Scripts/testAndReport.sh \
+                    "${WORKSPACE_PATH}" \
+                    "${TEST_BUILD_SCHEME}" \
+                    "${DEST_DEVICE}" \
+                    "${DEST_OS}" \
+                    "${GITHUB_TOKEN}" \
+                    "${CHANGE_ID}"
                 '''
                 githubNotify context: 'Unit Tests', status: 'SUCCESS', description: '단위 테스트 통과'
             }
