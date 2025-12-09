@@ -31,7 +31,7 @@ xcodebuild \
     -resultBundlePath "$RESULT_BUNDLE_PATH"
 
 # 리포트 생성
-REPORT=$(xcresultparser "$RESULT_BUNDLE_PATH" -o md -p '.' -c )
+REPORT=$(xcresultparser "$RESULT_BUNDLE_PATH" -o md -p '.' -c)
 
 # PR 코멘트 작성
 ./Scripts/createUniquePRComment.sh \

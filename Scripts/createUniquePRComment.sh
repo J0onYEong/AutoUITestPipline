@@ -22,6 +22,11 @@ WILL_DELETE_COMMENT_IDS=$(
 
 # 기존 코멘트 삭제
 echo "$WILL_DELETE_COMMENT_IDS" | while read -r COMMENT_ID; do
+  if [[ -z "$COMMENT_ID" ]]; then
+    # 빈 줄 무시
+    continue
+  fi
+
   curl -L \
     -X DELETE \
     -H "Accept: application/vnd.github+json" \
@@ -31,7 +36,8 @@ echo "$WILL_DELETE_COMMENT_IDS" | while read -r COMMENT_ID; do
 done
 
 # 새로운 코멘트 생성
-NEW_BODY="## ${UNIQUE_TITLE}\\n${COMMENT_BODY}"
+NEW_BODY=$(echo "## ${UNIQUE_TITLE}\n${COMMENT_BODY}")
+PARSED_BODY=$(jq -n --arg body "$NEW_BODY" '{body: $body}')
 
 curl -L \
   -X POST \
@@ -39,4 +45,4 @@ curl -L \
   -H "Authorization: Bearer ${GIT_TOKEN}" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   ${BASE_URL}/issues/${PR_NUMBER}/comments \
-  -d "{\"body\": \"${NEW_BODY}\"}" > /dev/null 2>&1
+  -d "$PARSED_BODY"
