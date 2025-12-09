@@ -15,7 +15,7 @@ RES_COMMENTS=$(curl -L \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   ${BASE_URL}/issues/comments)
 
-# 기존 코멘트 아이디 도출
+# 타이틀을 포함하는 아이디 도출
 WILL_DELETE_COMMENT_IDS=$(
   printf '%s' "$RES_COMMENTS" | jq '.[] | select(.body | contains("'"## ${UNIQUE_TITLE}"'")) | .id'
 )
