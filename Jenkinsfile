@@ -34,13 +34,12 @@ pipeline {
                 '''
                 
                 sh '''
-                curl -L \
-                    -X POST \
-                    -H "Accept: application/vnd.github+json" \
-                    -H "Authorization: Bearer $GITHUB_TOKEN" \
-                    -H "X-GitHub-Api-Version: 2022-11-28" \
-                    https://api.github.com/repos/J0onYEong/AutoUITestPipline/issues/${CHANGE_ID}/comments \
-                    -d '{ "body": "빌드가 완료되었습니다! 🎉🎉" }'
+                
+                zsh ./Scripts/createUniquPRComment.sh \
+                    "Build Result" \
+                    "## 빌드를 성공적으로 완료했습니다! 🎉" \
+                    "${GITHUB_TOKEN}" \
+                    "${CHANGE_ID}"
                 '''
 
                 githubNotify context: 'Build Application', status: 'SUCCESS', description: '빌드 성공'

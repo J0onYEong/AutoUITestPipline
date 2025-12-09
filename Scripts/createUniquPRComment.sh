@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+export PATH="/opt/homebrew/bin:$PATH"
+
 UNIQUE_TITLE=$1
 COMMENT_BODY=$2
 GIT_TOKEN=$3
