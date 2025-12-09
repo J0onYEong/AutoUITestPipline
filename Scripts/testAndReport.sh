@@ -19,8 +19,6 @@ cleanup() {
 }   
 trap cleanup EXIT
 
-cd Junios
-
 # 테스트 실행
 xcodebuild \
     -workspace ${WORKSPACE_PATH} \

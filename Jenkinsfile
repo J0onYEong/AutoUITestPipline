@@ -54,7 +54,7 @@ pipeline {
             steps {
                 githubNotify context: 'Unit Tests', status: 'PENDING', description: '빌드 성공'
                 sh '''
-                echo "Running UI Tests for Pull Request #${CHANGE_ID}"
+                echo "Running Unit Tests for Pull Request #${CHANGE_ID}"
 
                 zsh ./Scripts/testAndReport.sh \
                     "${WORKSPACE_PATH}" \
