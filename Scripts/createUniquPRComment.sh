@@ -1,7 +1,5 @@
 #!/bin/zsh
 
-export PATH="/opt/homebrew/bin:$PATH"
-
 UNIQUE_TITLE=$1
 COMMENT_BODY=$2
 GIT_TOKEN=$3
@@ -19,7 +17,7 @@ RES_COMMENTS=$(curl -L \
 
 # 기존 코멘트 아이디 도출
 WILL_DELETE_COMMENT_IDS=$(
-  echo "$RES_COMMENTS" | yq '.[] | select(.body | contains("'"## ${UNIQUE_TITLE}"'")) | .id'
+  printf '%s' "$RES_COMMENTS" | jq '.[] | select(.body | contains("'"## ${UNIQUE_TITLE}"'")) | .id'
 )
 
 # 기존 코멘트 삭제
