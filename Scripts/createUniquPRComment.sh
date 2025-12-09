@@ -7,7 +7,7 @@ PR_NUMBER=$4
 
 BASE_URL="https://api.github.com/repos/J0onYEong/AutoUITestPipline"
 
-# 코맨트 획득
+# 기존 코멘트 획득
 RES_COMMENTS=$(curl -L \
   -X GET \
   -H "Accept: application/vnd.github+json" \
