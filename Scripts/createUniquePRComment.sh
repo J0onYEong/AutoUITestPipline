@@ -36,8 +36,8 @@ echo "$WILL_DELETE_COMMENT_IDS" | while read -r COMMENT_ID; do
 done
 
 # 새로운 코멘트 생성
-PARSED_COMMENT=$(jq -Rs "$COMMENT_BODY")
-BODY="## ${UNIQUE_TITLE}\n${PARSED_COMMENT}"
+NEW_BODY=$(echo "## ${UNIQUE_TITLE}\n${COMMENT_BODY}")
+BODY=$(jq -n --arg body "$NEW_BODY" '{body: $body}')
 
 curl -L \
   -X POST \
